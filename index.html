@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pernikahan - Putra & Fitri</title>
+    <link rel="stylesheet" href="assets/css/cover_style.css" />
+  </head>
+  <body>
+    <section id="sectionKecil">
+      <div class="cover" id="cover">
+        
+        <p class="gowunbatang-bold title">Undangan Pernikahan</p>
+        <h1 class="nama">Putra & Fitri</h1>
+        <div class="gowunbatang-bold tamu">
+          Yang Terhormat <br />
+          Bapak/Ibu/Saudara/I <br />
+          <div class="box-tamu">
+            <span id="namaTamu">Tamu Undangan</span>
+          </div>
+        </div>
+        <button class="open gowunbatang-bold btn-open" id="open">
+          <img src="assets/icon/envelope-paper-heart.svg" alt="Icon" />
+          Buka Undangan
+        </button>
+        <div class="gowunbatang-bold note">
+          Mohon maaf apabila ada kesalahan penulisan nama/gelar
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Ambil parameter dari URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const nama = urlParams.get('to');
+
+      // Tampilkan ke halaman
+      if (nama) {
+        document.getElementById("namaTamu").innerText = nama;
+      }
+    </script>
+
+    <script>
+      const btn = document.getElementById("open");
+      const cover = document.getElementById("cover");
+      const audio = document.getElementById("myAudio");
+
+      btn.addEventListener("click", () => {
+
+        btn.style.animation = "none";
+
+        if (audio) {
+          audio.play();
+        }
+
+        cover.classList.add("opened");
+
+        setTimeout(() => {
+          window.location.href = "core.html";
+
+          // 🔥 SCROLL KE KONTEN
+          document.getElementById("sectionBesar").scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }, 1000);
+      });
+    </script>
+
+  </body>
+  <script src="assets/js/script.js"></script>
+</html>
