@@ -23,10 +23,10 @@
     </style>
   </head>
   <body>
-    <audio id="myAudio" autoplay loop>
+    <audio id="myAudio" loop>
       <source src="assets/music/musik.mp3" type="audio/mpeg" />
     </audio>
-    <button id="playButton" class="moon-button"></button>
+    <button id="playButton" class="moon-button paused"></button>
     <!-- HERO -->
     <section id="sectionBesar">
       <div class="pembungkus">
@@ -70,7 +70,7 @@
 
             <div class="foto-box">
               <div class="frame">
-                <img src="assets/images/imung-11.jpg" alt="Pengantin Pria" class="foto">
+                <img src="assets/images/imung.jpg" alt="Pengantin Pria" class="foto">
               </div>
 
               <div class="info">
@@ -84,7 +84,7 @@
 
                 <a href="https://www.instagram.com/murtiyananugraha/" target="_blank" class="ig">
                   <i class="fa-brands fa-instagram"></i>
-                  Instagram
+                  @murtiyananugraha
                 </a>
               </div>
             </div>
@@ -110,13 +110,13 @@
 
             <div class="foto-box">
               <div class="frame">
-                <img src="assets/images/wanita.jpg" class="foto">
+                <img src="assets/images/fitri.jpg" class="foto">
               </div>
 
               <div class="info">
                 <h2>Fitri Diah Permata Sari</h2>
                 <p>
-                  Putri Kedua Dari <br>
+                  Putri Pertama Dari <br>
                   Bapak Sasminto & Ibu Sri Lestari
                 </p>
                 <p>Gupolo, RT 04/ RW 02, <br>
@@ -124,7 +124,7 @@
                 </p>
                 <a href="https://www.instagram.com/ftrdiahhh_/" target="_blank" class="ig">
                   <i class="fa-brands fa-instagram"></i>
-                  Instagram
+                  @ftrdiahhh_
                 </a>
               </div>
             </div>
@@ -198,7 +198,7 @@
 
             <div class="jam">
               <i class="fa-regular fa-clock"></i>
-              10.00 WIB
+              09.30 WIB
             </div>
             <div class="divider-crd"></div>
             <div class="icon-lokasi">
@@ -455,7 +455,63 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.js"></script>
-    
+    <script>
+      const audio = document.getElementById("myAudio");
+      const btn = document.getElementById("playButton");
+
+      let isPlaying = false;
+
+      function setPlaying() {
+        isPlaying = true;
+        btn.classList.remove("paused");
+        btn.classList.add("playing");
+      }
+
+      function setPaused() {
+        isPlaying = false;
+        btn.classList.remove("playing");
+        btn.classList.add("paused");
+      }
+
+      // 🔥 AUTO PLAY dari index
+      window.addEventListener("load", function () {
+        const shouldPlay = localStorage.getItem("playMusic");
+
+        if (shouldPlay === "true") {
+          audio.play().then(() => {
+            setPlaying();
+          }).catch(() => {
+            console.log("Autoplay diblokir");
+          });
+
+          localStorage.removeItem("playMusic");
+        } else {
+          setPaused();
+        }
+      });
+
+      // 🎵 TOGGLE BUTTON
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+
+        if (!isPlaying) {
+          audio.play();
+          setPlaying();
+        } else {
+          audio.pause();
+          setPaused();
+        }
+      });
+
+      // 🔥 fallback klik pertama
+      document.addEventListener("click", function () {
+        if (!isPlaying) {
+          audio.play();
+          setPlaying();
+        }
+      }, { once: true });
+    </script>
+
     <script>
     window.addEventListener("load", function(){
 
