@@ -43,26 +43,18 @@
     <script>
       const btn = document.getElementById("open");
       const cover = document.getElementById("cover");
-      const audio = document.getElementById("myAudio");
 
       btn.addEventListener("click", () => {
 
         btn.style.animation = "none";
 
-        if (audio) {
-          audio.play();
-        }
+        // 🔥 SIMPAN STATUS UNTUK HALAMAN BERIKUTNYA
+        localStorage.setItem("playMusic", "true");
 
         cover.classList.add("opened");
 
         setTimeout(() => {
           window.location.href = "core.html";
-
-          // 🔥 SCROLL KE KONTEN
-          document.getElementById("sectionBesar").scrollIntoView({
-            behavior: "smooth"
-          });
-
         }, 1000);
       });
     </script>
