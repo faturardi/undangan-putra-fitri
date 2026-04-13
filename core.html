@@ -504,12 +504,34 @@
       });
 
       // 🔥 fallback klik pertama
-      document.addEventListener("click", function () {
-        if (!isPlaying) {
-          audio.play();
+      function tryPlayAudio() {
+        audio.play().then(() => {
           setPlaying();
+        }).catch(() => {
+          console.log("Butuh interaksi user");
+        });
+      }
+      
+      // 🔥 AUTO dari index
+      window.addEventListener("load", function () {
+        const shouldPlay = localStorage.getItem("playMusic");
+      
+        if (shouldPlay === "true") {
+          tryPlayAudio();
+          localStorage.removeItem("playMusic");
+        } else {
+          setPaused();
         }
-      }, { once: true });
+      });
+      
+      // 🔥 TRIGGER tambahan (WAJIB untuk Firefox & Safari)
+      ["click", "touchstart", "scroll"].forEach(event => {
+        document.addEventListener(event, () => {
+          if (!isPlaying) {
+            tryPlayAudio();
+          }
+        }, { once: true });
+      });
     </script>
 
     <script>
