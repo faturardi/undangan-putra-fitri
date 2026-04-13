@@ -36,6 +36,14 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  display: flex;
+}
+#sectionBesar {
+  height: 100vh;
+}
+
+#sectionKecil {
+  height: 100vh;
 }
 
 * {
@@ -77,33 +85,39 @@ body {
 
 .moon-button {
   position: fixed;
-  right: 30px;
+  right: 25px;
   bottom: 20px;
   width: 50px;
   height: 50px;
+
   background-color: var(--primary);
-  border: none;
-  cursor: pointer;
-  background-image: url("../icon/pause-fill.svg");
-  background-size: contain;
+  background-size: 60%; /* biar icon tidak terlalu penuh */
+  background-repeat: no-repeat;
+  background-position: center;
+
   border-radius: 50%;
   border: 2px solid white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  cursor: pointer;
   z-index: 1000;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .moon-button:hover {
   transform: scale(1.1);
 }
 
+/* 🎵 SAAT PLAY */
 .moon-button.playing {
-  background-image: url("../icon/pause-fill.svg"); /* Ganti dengan URL icon bulan saat bermain */
+  background-image: url("../icon/pause-fill.svg");
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* ⏸ SAAT PAUSE */
 .moon-button.paused {
-  background-image: url("../icon/play-fill.svg"); /* Ganti dengan URL icon bulan saat dijeda */
+  background-image: url("../icon/play-fill.svg");
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -457,8 +471,9 @@ body {
   align-items:center;
   justify-content:center;
 
-  width:170px;
-  height:45px;
+  padding: 10px 18px; /* biar fleksibel */
+  width: auto; /* ikut panjang teks */
+  height: auto;
 
   background:var(--primary);
   border:2px solid white;
@@ -466,20 +481,27 @@ body {
 
   color:white;
   text-decoration:none;
-  font-size:18px;
-
+  font-size:16px;
+  transition: all 0.3s ease;
   margin-top:18px;
 }
 
+.ig {
+  color: white;
+}
+
 .ig i{
-  margin-right:6px;
-  font-size:18px;
+  margin-right: 8px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  color: inherit;
 }
 
 .pengantin-pria .ig:hover,
 .pengantin-wanita .ig:hover{
   background:white;
-  color:var(--primary);
+  color:var(--primary) !important;
+  border-color: var(--primary);
 }
 
 .dengan{
